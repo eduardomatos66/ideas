@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import LinkAddressForm
 from ..models import LinkAddress
+from ..serializers import LinkAddressSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class LinkAddressViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows LinkAddress to be viewed or edited.
+    """
+    queryset = LinkAddress.objects.all()
+    serializer_class = LinkAddressSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_link_address(request, link_address_id=0):

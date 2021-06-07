@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import ResidenceStudentForm
 from ..models import ResidenceStudent
+from ..serializers import ResidenceStudentSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class ResidenceStudentViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows ResidenceStudent to be viewed or edited.
+    """
+    queryset = ResidenceStudent.objects.all()
+    serializer_class = ResidenceStudentSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_residence_student(request, residence_student_id=0):

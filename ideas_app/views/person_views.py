@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import PersonForm
 from ..models import Person
+from ..serializers import PersonSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class PersonViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Person to be viewed or edited.
+    """
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_person(request, person_id=0):

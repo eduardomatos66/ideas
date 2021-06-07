@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import DevToolsProjectForm
 from ..models import DevToolsProject
+from ..serializers import DevToolsProjectSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class DevToolsProjectViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows DevToolsProject to be viewed or edited.
+    """
+    queryset = DevToolsProject.objects.all()
+    serializer_class = DevToolsProjectSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_dev_tools_project(request, dev_tools_project_id=0):

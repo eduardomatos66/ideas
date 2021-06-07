@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import MonographInfoForm
 from ..models import MonographInfo
+from ..serializers import MonographInfoSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class MonographInfoViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows MonographInfo to be viewed or edited.
+    """
+    queryset = MonographInfo.objects.all()
+    serializer_class = MonographInfoSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_monograph_info(request, monograph_info_id=0):

@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import IdeaForm
 from ..models import Idea
+from ..serializers import IdeaSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class IdeaViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Idea to be viewed or edited.
+    """
+    queryset = Idea.objects.all()
+    serializer_class = IdeaSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_idea(request, idea_id=0):

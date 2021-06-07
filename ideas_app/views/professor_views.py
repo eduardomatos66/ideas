@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import ProfessorForm
 from ..models import Professor
+from ..serializers import ProfessorSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class ProfessorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Professor to be viewed or edited.
+    """
+    queryset = Professor.objects.all()
+    serializer_class = ProfessorSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_professor(request, professor_id=0):

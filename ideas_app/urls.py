@@ -14,13 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path(''blog/', include('blog.urls'))
 """
 
-from django.urls import path
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from ideas_app.views import index, dev_tools_project_views, idea_views, link_address_views, monograph_info_views, \
     person_views, professor_views, research_info_views, researcher_views, residence_student_views
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register(r'rs_dev_tools_project', dev_tools_project_views.DevToolsProjectViewSet)
+router.register(r'rs_idea', idea_views.IdeaViewSet)
+router.register(r'rs_link_address', link_address_views.LinkAddressViewSet)
+router.register(r'rs_monograph_info', monograph_info_views.MonographInfoViewSet)
+router.register(r'rs_person', person_views.PersonViewSet)
+router.register(r'rs_professor', professor_views.ProfessorViewSet)
+router.register(r'rs_research_info', research_info_views.ResearchInfoViewSet)
+router.register(r'rs_researcher', researcher_views.ResearcherViewSet)
+router.register(r'rs_residence_student', residence_student_views.ResidenceStudentViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('', index.test, name='test'),
     path('person', person_views.form_person, name='form_person'),
     path('person/delete/<int:person_id>', person_views.delete_person, name='delete_person'),

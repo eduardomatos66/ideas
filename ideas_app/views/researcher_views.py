@@ -4,6 +4,18 @@ from django.template import loader
 
 from ..forms import ResearcherForm
 from ..models import Researcher
+from ..serializers import ResearcherSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+
+
+class ResearcherViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Researcher to be viewed or edited.
+    """
+    queryset = Researcher.objects.all()
+    serializer_class = ResearcherSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def form_researcher(request, researcher_id=0):
