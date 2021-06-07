@@ -30,7 +30,7 @@ def delete_researcher(request, researcher_id):
 
 
 def list_researcher(request):
-    researcher_list = Researcher.objects
+    researcher_list = Researcher.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': researcher_list,

@@ -30,7 +30,7 @@ def delete_professor(request, professor_id):
 
 
 def list_professor(request):
-    professor_list = Professor.objects
+    professor_list = Professor.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': professor_list,

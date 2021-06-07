@@ -30,7 +30,7 @@ def delete_link_address(request, link_address_id):
 
 
 def list_link_address(request):
-    link_address_list = LinkAddress.objects
+    link_address_list = LinkAddress.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': link_address_list,

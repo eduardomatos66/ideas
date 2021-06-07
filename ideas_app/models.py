@@ -76,9 +76,9 @@ class Idea(models.Model):
     progress = models.CharField(max_length=40, choices=IdeaProgress.choices, default=IdeaProgress.NOT_STARTED)
     suggested_by = models.CharField(max_length=200)
     impacted_areas = models.CharField(max_length=200)
-    suggested_po = models.CharField(max_length=200) # TODO: change to list
+    suggested_po = models.ManyToManyField('Person', related_name='ideas_po')
     priority = models.CharField(max_length=200)
-    related_links = models.ForeignKey(LinkAddress, on_delete=models.DO_NOTHING) # TODO: change to list
+    related_links = models.ManyToManyField('LinkAddress', related_name='ideas_link')
     register_date = models.DateField(default=timezone.now)
     comments = models.CharField(max_length=200)
 
@@ -111,7 +111,7 @@ class ResearchInfo(models.Model):
     researcher = models.CharField(max_length=40, choices=ResearchType.choices, default=ResearchType.N_A)
     research_type = models.CharField(max_length=200)
     professor = models.ForeignKey(Professor, on_delete=models.DO_NOTHING)
-    po = models.CharField(max_length=200) # TODO: change to list
+    po = models.ManyToManyField('Person', related_name='research_infos_po')
     impacted_project_test_area = models.CharField(max_length=200)
     start_date = models.DateField(default=timezone.now)
     due_date = models.DateField(default=timezone.now)
@@ -131,14 +131,14 @@ class MonographInfo(models.Model):
     idea_key = models.ForeignKey(Idea, on_delete=models.DO_NOTHING, null=False)
     title = models.CharField(max_length=200)
     residence_class = models.CharField(max_length=200, null=False)
-    student = models.ForeignKey(ResidenceStudent, on_delete=models.DO_NOTHING) # TODO: change to list
-    professor = models.ForeignKey(Professor, on_delete=models.DO_NOTHING) # TODO: change to list
-    po = models.CharField(max_length=200) # TODO: change to list
+    student = models.ManyToManyField('ResidenceStudent', related_name='monograph_infos_residence_student')
+    professor = models.ManyToManyField('Professor', related_name='monograph_infos_professor')
+    po = models.ManyToManyField('Person', related_name='monograph_infos_po')
     comments = models.CharField(max_length=200)
-    related_links = models.ForeignKey(LinkAddress, on_delete=models.DO_NOTHING) # TODO: change to list
+    related_links = models.ManyToManyField('LinkAddress', related_name='monograph_infos_link')
 
     class Meta:
-        ordering = ['monograph_key', 'idea_key', 'title', 'residence_class', 'student', 'professor']
+        ordering = ['monograph_key', 'idea_key', 'title', 'residence_class']
 
     def __str__(self):
         return f'{self.monograph_key} ({self.idea_key}): {self.title}'
@@ -165,14 +165,14 @@ class DevToolsProject(models.Model):
     dependencies = models.CharField(max_length=200)
     start_date = models.DateField(default=timezone.now)
     due_date = models.DateField(default=timezone.now)
-    devs = models.CharField(max_length=200) # TODO: change to list
-    po = models.CharField(max_length=200) # TODO: change to list
-    related_links = models.ForeignKey(LinkAddress, on_delete=models.DO_NOTHING) # TODO: change to list
+    devs = models.ManyToManyField('Person', related_name='dev_tools_projects_devs')
+    po = models.ManyToManyField('Person', related_name='dev_tools_projects_po')
+    related_links = models.ManyToManyField('LinkAddress', related_name='dev_tools_projects_link')
     comments = models.CharField(max_length=200)
 
     class Meta:
         ordering = ['idea_key', 'monograph_key', 'research_key', 'tool_key', 'tool_name', 'status', 'start_date',
-                    'due_date', 'devs']
+                    'due_date']
 
     def __str__(self):
         return f'{self.tool_key} ({self.status}): {self.tool_name}'

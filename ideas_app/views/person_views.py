@@ -30,7 +30,7 @@ def delete_person(request, person_id):
 
 
 def list_person(request):
-    person_list = Person.objects
+    person_list = Person.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': person_list,

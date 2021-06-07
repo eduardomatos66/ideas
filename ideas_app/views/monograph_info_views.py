@@ -30,7 +30,7 @@ def delete_monograph_info(request, monograph_info_id):
 
 
 def list_monograph_info(request):
-    monograph_info_list = MonographInfo.objects
+    monograph_info_list = MonographInfo.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': monograph_info_list,

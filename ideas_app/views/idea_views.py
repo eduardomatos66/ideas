@@ -30,7 +30,7 @@ def delete_idea(request, idea_id):
 
 
 def list_idea(request):
-    idea_list = Idea.objects
+    idea_list = Idea.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': idea_list,

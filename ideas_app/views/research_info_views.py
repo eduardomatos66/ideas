@@ -30,7 +30,7 @@ def delete_research_info(request, research_info_id):
 
 
 def list_research_info(request):
-    research_info_list = ResearchInfo.objects
+    research_info_list = ResearchInfo.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': research_info_list,

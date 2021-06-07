@@ -30,7 +30,7 @@ def delete_residence_student(request, residence_student_id):
 
 
 def list_residence_student(request):
-    residence_student_list = ResidenceStudent.objects
+    residence_student_list = ResidenceStudent.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': residence_student_list,

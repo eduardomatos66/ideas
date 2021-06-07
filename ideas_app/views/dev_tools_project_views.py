@@ -30,7 +30,7 @@ def delete_dev_tools_project(request, dev_tools_project_id):
 
 
 def list_dev_tools_project(request):
-    dev_tools_project_list = DevToolsProject.objects
+    dev_tools_project_list = DevToolsProject.objects.all()
     template = loader.get_template('index.html')
     context = {
         'items_list': dev_tools_project_list,
