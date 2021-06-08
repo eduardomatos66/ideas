@@ -17,16 +17,27 @@ class Person(models.Model):
         return self.name
 
 
+class Institute(models.Model):
+    short_name = models.CharField(max_length=50, unique=True, null=False)
+    long_name = models.CharField(max_length=50, null=False)
+
+    class Meta:
+        ordering = ['short_name']
+
+    def save(self, *args, **kwargs):
+        self.short_name = self.short_name.upper()
+        super(Institute, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.short_name} - {self.long_name}'
+
+
 class Professor(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
-    institute = models.CharField(max_length=100)
+    institute = models.ForeignKey(Institute, on_delete=models.DO_NOTHING, null=False)
 
     class Meta:
         ordering = ['person']
-
-    def save(self, *args, **kwargs):
-        self.institute = self.institute.upper()
-        super(Professor, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.person
@@ -36,15 +47,11 @@ class ResidenceStudent(models.Model):
     person = models.ForeignKey(Person, on_delete=models.DO_NOTHING, null=False)
     residence_class = models.CharField(max_length=100)
     core_id = models.CharField(max_length=100)
-    institute = models.CharField(max_length=100, null=False)
+    institute = models.ForeignKey(Institute, on_delete=models.DO_NOTHING, null=False)
     team = models.CharField(max_length=100)
 
     class Meta:
         ordering = ['person', 'residence_class', 'institute', 'team']
-
-    def save(self, *args, **kwargs):
-        self.institute = self.institute.upper()
-        super(ResidenceStudent, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.person} ({self.core_id}) - T{self.residence_class}'
@@ -53,15 +60,11 @@ class ResidenceStudent(models.Model):
 class Researcher(models.Model):
     person = models.ForeignKey(Person, on_delete=models.DO_NOTHING, null=False)
     core_id = models.CharField(max_length=100)
-    institute = models.CharField(max_length=100, null=False)
+    institute = models.ForeignKey(Institute, on_delete=models.DO_NOTHING, null=False)
     team_org = models.CharField(max_length=100)
 
     class Meta:
         ordering = ['person', 'institute', 'team_org']
-
-    def save(self, *args, **kwargs):
-        self.institute = self.institute.upper()
-        super(Researcher, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.person} ({self.core_id}) - {self.team_org}'
