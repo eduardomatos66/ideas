@@ -18,13 +18,13 @@ class ProfessorSerializer(serializers.HyperlinkedModelSerializer):
 class ResidenceStudentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ResidenceStudent
-        fields = ['person', 'residence_class', 'core_id', 'institution', 'team']
+        fields = ['person', 'residence_class', 'core_id', 'institute', 'team']
 
 
 class ResearcherSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Researcher
-        fields = ['person', 'core_id', 'institution', 'team_org']
+        fields = ['person', 'core_id', 'institute', 'team_org']
 
 
 class LinkAddressSerializer(serializers.HyperlinkedModelSerializer):
