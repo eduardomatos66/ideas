@@ -123,12 +123,12 @@ class ResearchInfo(models.Model):
         SCIENTIFIC_INITIATION = 'Scientific Initiation'
         N_A = 'N/A'
 
-    research_key = models.CharField(max_length=1200, null=False)
+    research_key = models.CharField(max_length=120, null=False)
     idea_key = models.ForeignKey(Idea, on_delete=models.DO_NOTHING, null=False)
     title = models.CharField(max_length=300, null=False)
     progress = models.CharField(max_length=40, choices=ResearchProgress.choices, default=ResearchProgress.IN_PROGRESS)
-    researcher = models.CharField(max_length=40, choices=ResearchType.choices, default=ResearchType.N_A)
-    research_type = models.CharField(max_length=100)
+    researcher = models.ForeignKey(Researcher, on_delete=models.DO_NOTHING, null=False)
+    research_type = models.CharField(max_length=40, choices=ResearchType.choices, default=ResearchType.N_A)
     professor = models.ForeignKey(Professor, on_delete=models.DO_NOTHING)
     po = models.ManyToManyField('Person', related_name='research_infos_po')
     impacted_project_test_area = models.CharField(max_length=100)
