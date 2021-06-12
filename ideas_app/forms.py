@@ -54,3 +54,9 @@ class DevToolsProjectForm(ModelForm):
     class Meta:
         model = DevToolsProject
         fields = '__all__'
+
+
+class InstituteForm(ModelForm):
+    class Meta:
+        model = Institute
+        fields = '__all__'

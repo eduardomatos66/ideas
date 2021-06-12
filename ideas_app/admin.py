@@ -4,6 +4,7 @@ from .models import *
 # Register your models here.
 admin.site.register(DevToolsProject)
 admin.site.register(Idea)
+admin.site.register(Institute)
 admin.site.register(LinkAddress)
 admin.site.register(MonographInfo)
 admin.site.register(Person)

@@ -15,7 +15,7 @@ class ResidenceStudentViewSet(viewsets.ModelViewSet):
     """
     queryset = ResidenceStudent.objects.all()
     serializer_class = ResidenceStudentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 def form_residence_student(request, residence_student_id=0):

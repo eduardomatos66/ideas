@@ -19,7 +19,7 @@ class Person(models.Model):
 
 class Institute(models.Model):
     short_name = models.CharField(max_length=50, unique=True, null=False)
-    long_name = models.CharField(max_length=50, null=False)
+    long_name = models.CharField(max_length=200, null=False)
 
     class Meta:
         ordering = ['short_name']

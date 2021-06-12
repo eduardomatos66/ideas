@@ -15,7 +15,7 @@ class ResearcherViewSet(viewsets.ModelViewSet):
     """
     queryset = Researcher.objects.all()
     serializer_class = ResearcherSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 def form_researcher(request, researcher_id=0):

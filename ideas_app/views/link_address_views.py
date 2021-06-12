@@ -15,7 +15,7 @@ class LinkAddressViewSet(viewsets.ModelViewSet):
     """
     queryset = LinkAddress.objects.all()
     serializer_class = LinkAddressSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 def form_link_address(request, link_address_id=0):

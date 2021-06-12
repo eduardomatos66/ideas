@@ -1,5 +1,5 @@
 from .models import Person, Professor, ResidenceStudent, Researcher, LinkAddress, Idea, ResearchInfo, MonographInfo, \
-    DevToolsProject
+    DevToolsProject, Institute
 from rest_framework import serializers
 
 
@@ -59,3 +59,9 @@ class DevToolsProjectSerializer(serializers.HyperlinkedModelSerializer):
         model = DevToolsProject
         fields = ['idea_key', 'monograph_key', 'research_key', 'tool_key', 'tool_name', 'status', 'current_version',
                   'dependencies', 'start_date', 'due_date', 'devs', 'po', 'related_links', 'comments']
+
+
+class InstituteSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Institute
+        fields = ['short_name', 'long_name']

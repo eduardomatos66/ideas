@@ -15,7 +15,7 @@ class MonographInfoViewSet(viewsets.ModelViewSet):
     """
     queryset = MonographInfo.objects.all()
     serializer_class = MonographInfoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 def form_monograph_info(request, monograph_info_id=0):

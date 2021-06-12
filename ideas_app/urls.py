@@ -17,14 +17,15 @@ Including another URLconf
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from ideas_app.views import index, dev_tools_project_views, idea_views, link_address_views, monograph_info_views, \
-    person_views, professor_views, research_info_views, researcher_views, residence_student_views
+from ideas_app.views import index, dev_tools_project_views, idea_views, institute_views, link_address_views, \
+    monograph_info_views, person_views, professor_views, research_info_views, researcher_views, residence_student_views
 from rest_framework import routers
 
 
 router = routers.DefaultRouter()
 router.register(r'rs_dev_tools_project', dev_tools_project_views.DevToolsProjectViewSet)
 router.register(r'rs_idea', idea_views.IdeaViewSet)
+router.register(r'rs_institute', institute_views.InstituteViewSet)
 router.register(r'rs_link_address', link_address_views.LinkAddressViewSet)
 router.register(r'rs_monograph_info', monograph_info_views.MonographInfoViewSet)
 router.register(r'rs_person', person_views.PersonViewSet)

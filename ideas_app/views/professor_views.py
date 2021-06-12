@@ -15,7 +15,7 @@ class ProfessorViewSet(viewsets.ModelViewSet):
     """
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 def form_professor(request, professor_id=0):

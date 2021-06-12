@@ -15,7 +15,7 @@ class DevToolsProjectViewSet(viewsets.ModelViewSet):
     """
     queryset = DevToolsProject.objects.all()
     serializer_class = DevToolsProjectSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 
 def form_dev_tools_project(request, dev_tools_project_id=0):
